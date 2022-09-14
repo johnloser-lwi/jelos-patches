@@ -1,0 +1,25 @@
+From 922be762e63b37f56ce29f7513e68c8bb9a86f8d Mon Sep 17 00:00:00 2001
+From: yangweiqin <yangweiqin@xd.com>
+Date: Wed, 14 Sep 2022 15:48:13 +0800
+Subject: [PATCH] more info
+
+---
+ packages/sysutils/busybox/scripts/init | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/packages/sysutils/busybox/scripts/init b/packages/sysutils/busybox/scripts/init
+index 19afb896..4e9b726d 100755
+--- a/packages/sysutils/busybox/scripts/init
++++ b/packages/sysutils/busybox/scripts/init
+@@ -1100,6 +1100,8 @@ prepare_sysroot() {
+ 
+   if [ ! -d "/sysroot/usr/lib/kernel-overlays/base/lib/modules/$(uname -r)/" -a -f "/sysroot/usr/lib/systemd/systemd" ]; then
+     echo ""
++    ls /sysroot/usr/lib/kernel-overlays/base/lib/modules
++    uname -r
+     echo "NEVER TOUCH boot= in syslinux.conf / cmdline.txt!"
+     echo "If you don't know what you are doing,"
+     echo "your installation is now broken."
+-- 
+2.33.1.windows.1
+
