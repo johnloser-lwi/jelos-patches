@@ -1,5 +1,5 @@
 diff --git a/packages/sysutils/busybox/scripts/init b/packages/sysutils/busybox/scripts/init
-index 69125cf7..525b8d4f 100755
+index 19afb896..023f9e5b 100755
 --- a/packages/sysutils/busybox/scripts/init
 +++ b/packages/sysutils/busybox/scripts/init
 @@ -1098,7 +1098,7 @@ prepare_sysroot() {
@@ -7,21 +7,12 @@ index 69125cf7..525b8d4f 100755
    mount --move /storage /sysroot/storage
  
 -  if [ ! -d "/sysroot/usr/lib/kernel-overlays/base/lib/modules/$(uname -r)/" -a -f "/sysroot/usr/lib/systemd/systemd" ]; then
-+  if [ ! -d "/sysroot/usr/lib/kernel-overlays/base/lib/modules/$(echo $(uname -r) | cut -d - -f 1)/" -a -f "/sysroot/usr/lib/systemd/systemd" ]; then
++  if [ ! -d "/sysroot/usr/lib/kernel-overlays/base/lib/modules/4.19.172/" -a -f "/sysroot/usr/lib/systemd/systemd" ]; then
      echo ""
-     ls /sysroot/usr/lib/kernel-overlays/base/lib/modules
-     uname -r
-@@ -1124,7 +1124,7 @@ check_amlogic_dtb() {
-   if grep -q "amlogic" /proc/device-tree/compatible 2>/dev/null; then
-     if grep -q "official" /sysroot/etc/os-release 2>/dev/null; then
-       progress "Checking Amlogic DTB"
--      if [ "$(uname -r)" = "3.14.29" ]; then
-+      if [ "$(echo $(uname -r) | cut -d - -f 1)" = "3.14.29" ]; then
-         DT_ID=$(cat /proc/device-tree/le-dt-id 2>/dev/null)
-       else
-         DT_ID=$(cat /proc/device-tree/coreelec-dt-id 2>/dev/null)
+     echo "NEVER TOUCH boot= in syslinux.conf / cmdline.txt!"
+     echo "If you don't know what you are doing,"
 diff --git a/packages/sysutils/systemd/scripts/kernel-overlays-setup b/packages/sysutils/systemd/scripts/kernel-overlays-setup
-index 67c5ca26..74498a13 100755
+index 67c5ca26..b7fcdc8b 100755
 --- a/packages/sysutils/systemd/scripts/kernel-overlays-setup
 +++ b/packages/sysutils/systemd/scripts/kernel-overlays-setup
 @@ -5,7 +5,7 @@
@@ -29,7 +20,7 @@ index 67c5ca26..74498a13 100755
  SYSTEM_OVERLAYS_DIR=/usr/lib/kernel-overlays
  OVERLAY_CONFIG_DIR=/storage/.cache/kernel-overlays
 -KVER=$(uname -r)
-+KVER=$(echo $(uname -r) | cut -d - -f 1)
++KVER=4.19.172
  MODULES_DIR="/var/lib/modules/${KVER}"
  FIRMWARE_DIR="/var/lib/firmware"
  USER_FIRMWARE_DIR="/storage/.config/firmware"
