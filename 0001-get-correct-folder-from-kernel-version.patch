@@ -1,0 +1,48 @@
+From ded80e8bc67816e12d295a7cecb59824337d49ea Mon Sep 17 00:00:00 2001
+From: johnloser-lwi <john-masterchief@hotmail.com>
+Date: Wed, 14 Sep 2022 21:37:39 +0800
+Subject: [PATCH] get correct folder from kernel version
+
+---
+ packages/sysutils/busybox/scripts/init | 4 ++--
+ packages/sysutils/systemd/package.mk   | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/packages/sysutils/busybox/scripts/init b/packages/sysutils/busybox/scripts/init
+index 19afb896..e939b943 100755
+--- a/packages/sysutils/busybox/scripts/init
++++ b/packages/sysutils/busybox/scripts/init
+@@ -1098,7 +1098,7 @@ prepare_sysroot() {
+   mount --move /flash /sysroot/flash
+   mount --move /storage /sysroot/storage
+ 
+-  if [ ! -d "/sysroot/usr/lib/kernel-overlays/base/lib/modules/$(uname -r)/" -a -f "/sysroot/usr/lib/systemd/systemd" ]; then
++  if [ ! -d "/sysroot/usr/lib/kernel-overlays/base/lib/modules/$(echo $(uname -r) | cut -d - -f 1)/" -a -f "/sysroot/usr/lib/systemd/systemd" ]; then
+     echo ""
+     echo "NEVER TOUCH boot= in syslinux.conf / cmdline.txt!"
+     echo "If you don't know what you are doing,"
+@@ -1121,7 +1121,7 @@ check_amlogic_dtb() {
+   if grep -q "amlogic" /proc/device-tree/compatible 2>/dev/null; then
+     if grep -q "official" /sysroot/etc/os-release 2>/dev/null; then
+       progress "Checking Amlogic DTB"
+-      if [ "$(uname -r)" = "3.14.29" ]; then
++      if [ "$(echo $(uname -r) | cut -d - -f 1)" = "3.14.29" ]; then
+         DT_ID=$(cat /proc/device-tree/le-dt-id 2>/dev/null)
+       else
+         DT_ID=$(cat /proc/device-tree/coreelec-dt-id 2>/dev/null)
+diff --git a/packages/sysutils/systemd/package.mk b/packages/sysutils/systemd/package.mk
+index 9b6bdef0..af6978f6 100644
+--- a/packages/sysutils/systemd/package.mk
++++ b/packages/sysutils/systemd/package.mk
+@@ -204,7 +204,7 @@ post_makeinstall_target() {
+   cp ${PKG_DIR}/scripts/usercache-setup ${INSTALL}/usr/bin
+ 
+   mkdir -p ${INSTALL}/usr/sbin
+-  cp ${PKG_DIR}/scripts/kernel-overlays-setup ${INSTALL}/usr/sbin
++  cp ${PKG_DIR}/scripts/+-setup ${INSTALL}/usr/sbin
+   cp ${PKG_DIR}/scripts/network-base-setup ${INSTALL}/usr/sbin
+   cp ${PKG_DIR}/scripts/systemd-timesyncd-setup ${INSTALL}/usr/sbin
+ 
+-- 
+2.35.1.windows.2
+
