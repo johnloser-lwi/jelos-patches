@@ -1,3 +1,21 @@
+diff --git a/packages/jelos/sources/scripts/batocera-config b/packages/jelos/sources/scripts/batocera-config
+index 8948fb6f..c13ae7b7 100755
+--- a/packages/jelos/sources/scripts/batocera-config
++++ b/packages/jelos/sources/scripts/batocera-config
+@@ -244,11 +244,11 @@ if [ "$command" == "module" ];then
+ 	modulename="$extra1"
+ 	map="$extra2"
+ 	# remove in all cases
+-	rmmod /lib/modules/`uname -r`/extra/${modulename}.ko >> $log
++	rmmod /lib/modules/4.19.172/extra/${modulename}.ko >> $log
+ 
+         if [ "$mode" == "load" ];then
+ 	        echo "loading module $modulename args = $map" >> $log
+-		insmod /lib/modules/`uname -r`/extra/${modulename}.ko $map >> $log
++		insmod /lib/modules/4.19.172/extra/${modulename}.ko $map >> $log
+ 		[ "$?" ] || exit 1
+         fi
+ 	exit 0
 diff --git a/packages/sysutils/busybox/scripts/init b/packages/sysutils/busybox/scripts/init
 index 19afb896..023f9e5b 100755
 --- a/packages/sysutils/busybox/scripts/init
