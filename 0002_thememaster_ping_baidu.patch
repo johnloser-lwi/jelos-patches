@@ -1,14 +1,14 @@
 diff --git a/packages/themes/thememaster/package.mk b/packages/themes/thememaster/package.mk
-index 18db1b0b..dc388990 100644
+index 5f63c06d..4bfacb16 100644
 --- a/packages/themes/thememaster/package.mk
 +++ b/packages/themes/thememaster/package.mk
 @@ -3,9 +3,9 @@
  # Copyright (C) 2022-present BrooksyTech (https://github.com/brooksytech)
  
  PKG_NAME="thememaster"
--PKG_VERSION="09bee95fea09760355777af824a7ad41dc1ae577"
-+PKG_VERSION="49586ece8ffec4cf17793da91754d28d90be1542"
- PKG_ARCH="any"
+-PKG_VERSION="663b59fd794fd655223e24638c48f3416e6039f4"
++PKG_VERSION="a8bc8a98193cf0fd6429d0948b9e3e4e90ecd6ed"
+ PKG_ARCH="aarch64"
 -PKG_SITE="https://github.com/JohnIrvine1433/ThemeMaster"
 +PKG_SITE="https://github.com/johnloser-lwi/ThemeMaster"
  PKG_URL="${PKG_SITE}.git"
