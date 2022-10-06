@@ -1,0 +1,13 @@
+diff --git a/packages/lang/lua/package.mk b/packages/lang/lua/package.mk
+index 7683eda3..84c12b5c 100644
+--- a/packages/lang/lua/package.mk
++++ b/packages/lang/lua/package.mk
+@@ -16,7 +16,7 @@ make_target() {
+ 
+ makeinstall_target() {
+   mkdir -p ${SYSROOT_PREFIX}/usr/include/lua$(get_pkg_version_maj_min)
+-  cp src/lua.h src/luaconf.h src/lualib.h src/lauxlib.h ${SYSROOT_PREFIX}/usr/include/lua$(get_pkg_version_maj_min)
++  cp src/lua.h src/luaconf.h src/lualib.h src/lauxlib.h src/lua.hpp ${SYSROOT_PREFIX}/usr/include/lua$(get_pkg_version_maj_min)
+ 
+   mkdir -p ${SYSROOT_PREFIX}/usr/lib
+   cp src/liblua.a ${SYSROOT_PREFIX}/usr/lib/liblua$(get_pkg_version_maj_min).a
